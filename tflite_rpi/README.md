@@ -8,7 +8,7 @@ Based on Debian Buster for ARMv7, it contains:
 To run:
 
 ```console
-docker run -it -p 8888:8888 -v <local_notebook_folder>:/root/notebooks --env="DISPLAY" --rm rio05docker/tflite_rpi:rpi3_test_3
+docker run -it --network=host -v /home/pi/Codice/notebooks/:/root/notebooks --env="DISPLAY" --restart=unless-stopped -d --name tflite_jupyter rio05docker/tflite_rpi:rpi3_test_3
 ```
 
 
