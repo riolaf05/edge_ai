@@ -9,7 +9,7 @@ Based on Debian Buster for ARMv7, it contains:
 To run:
 
 ```console
-docker run -d --restart unless-stopped --privileged --device /dev/gpiomem  -p 5002:5002 -v /dev/bus/usb:/dev/bus/usb rio05docker/tflite_rpi3_tpu:rpi3_test_1
+docker run -d --restart unless-stopped --privileged --device /dev/gpiomem  -p 5002:5002 -v /dev/bus/usb:/dev/bus/usb rio05docker/tflite_rpi3_tpu:rpi3_test_2
 ```
 
 
