@@ -1,8 +1,8 @@
 FROM raspbian/stretch:latest
 
-RUN mkdir /root/scripts
-
-WORKDIR /root/scripts
+#Workdir
+RUN mkdir /home/scripts
+WORKDIR /home/scripts
 
 #Install Python3
 RUN apt-get update
@@ -24,10 +24,6 @@ RUN apt-get install python3-pip -y
 
 #Update pip3
 RUN pip3 install --upgrade pip
-
-#Workdir
-RUN mkdir /home/scripts
-WORKDIR /home/scripts
 
 #Tensorflow Lite installing
 RUN wget 'https://dl.google.com/coral/python/tflite_runtime-1.14.0-cp35-cp35m-linux_armv7l.whl'
