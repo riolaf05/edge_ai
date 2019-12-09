@@ -8,11 +8,11 @@ Based on Raspbian Stretch, it contains:
 To run with Raspberry Camera:
 
 ```console
-docker run -it -d --restart unless-stopped --privileged --device /dev/gpiomem rio05docker/tflite_rpi3_tpu:rpi3_test_4
+docker run -it -d --restart unless-stopped --privileged --device /dev/gpiomem rio05docker/tflite_rpi3_picamera:rpi3_test_4
 ```
 
 To run with Tensorflow Lite demo:
 
 ```console
-docker run -it -d rio05docker/tflite_rpi3_tpu:rpi3_test_4.1 /home/scripts/pi_image_classifier_tflite_demo.py --image <image_path>
+docker run -it -d rio05docker/tflite_rpi3_picamera:rpi3_test_4.1 python3.5 /home/scripts/pi_image_classifier_tflite_demo.py --image <image_path>
 ```
