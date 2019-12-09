@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get TF Lite model and labels
-wget https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip
+#wget https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip
 
 unzip mobilenet_v1_1.0_224_quant_and_labels.zip -d /home/scripts/models
 
