@@ -86,6 +86,7 @@ RUN chmod +x /home/scripts/models/download.sh
 RUN /home/scripts/models/download.sh
 
 #Copy demo file
+RUN mkdir /home/scripts/samples
 COPY /tflite/pi_image_classifier_tflite_demo.py /home/scripts
 
 # Configuring access to Jupyter
