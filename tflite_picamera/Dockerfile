@@ -86,6 +86,9 @@ RUN conda update --all
 #Copy dependencies download file
 COPY ./download.sh /home/scripts/models
 
+#Copy demo file
+COPY ./tflite/pi_image_classifier_tflite_demo.py /home/scripts
+
 # Configuring access to Jupyter
 #RUN mkdir /root/notebooks
 #ENV PATH /root/.local/bin/:$PATH
