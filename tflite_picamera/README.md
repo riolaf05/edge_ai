@@ -14,5 +14,5 @@ docker run -it -d --restart unless-stopped --privileged --device /dev/gpiomem ri
 To run with Tensorflow Lite demo:
 
 ```console
-docker run -it -d rio05docker/tflite_rpi3_tpu:rpi3_test_4 /home/scripts/pi_image_classifier_tflite_demo.py --image <image_path>
+docker run -it -d rio05docker/tflite_rpi3_tpu:rpi3_test_4.1 /home/scripts/pi_image_classifier_tflite_demo.py --image <image_path>
 ```
