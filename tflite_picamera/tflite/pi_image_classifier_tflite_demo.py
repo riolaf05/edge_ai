@@ -35,7 +35,7 @@ def main():
   #args = parser.parse_args()
   
   image = Image.open("/home/scripts/gatto.jpeg")
-  image=im.convert('RGB').resize((width, height), Image.ANTIALIAS)
+  image=image.convert('RGB').resize((width, height), Image.ANTIALIAS)
 
   results = classify_image(interpreter, image)
   print("The image is a:", results)
