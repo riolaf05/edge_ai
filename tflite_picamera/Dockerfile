@@ -4,8 +4,10 @@ FROM raspbian/stretch:latest
 RUN mkdir /home/scripts
 WORKDIR /home/scripts
 
-#Install Python3
+#Updating packet manager
 RUN apt-get update
+
+#Install Python3
 RUN apt-get install -y build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev
 RUN wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tar.xz \
 && tar xf Python-3.6.5.tar.xz \
@@ -47,7 +49,6 @@ RUN pip3 install imutils --user
 RUN pip3 install argparse --user 
 RUN pip3 install Pillow --user  
 RUN pip3 install picamera --user
-RUN apt install ipython -y
 #RUN pip3 install jupyter --user   #problem: Package 'ipython' requires a different Python: 3.5.3 not in '>=3.6'
 #RUN pip install pyarrow --user 
 #RUN pip install python-opencv  --user #TODO: problem..unable to find python-opencv on Debian buster repositories!
