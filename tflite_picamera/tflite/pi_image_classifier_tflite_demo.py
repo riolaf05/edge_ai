@@ -7,11 +7,6 @@ import picamera
 from PIL import Image
 from tflite_runtime.interpreter import Interpreter
 
-labels=load_labels("/home/scripts/models/labels_mobilenet_quant_v1_224.txt")
-interpreter = Interpreter("/home/scripts/models/mobilenet_v1_1.0_224_quant.tflite")
-interpreter.allocate_tensors()
-_, height, width, _ = interpreter.get_input_details()[0]['shape']
-
 def load_labels(path):
   with open(path, 'r') as f:
     return {i: line.strip() for i, line in enumerate(f.readlines())}
@@ -43,6 +38,11 @@ def main():
   parser.add_argument('--image', help='File path of image file to detect.', required=True)
   args = parser.parse_args()
   
+  labels=load_labels("/home/scripts/models/labels_mobilenet_quant_v1_224.txt")
+  interpreter = Interpreter("/home/scripts/models/mobilenet_v1_1.0_224_quant.tflite")
+  interpreter.allocate_tensors()
+  _, height, width, _ = interpreter.get_input_details()[0]['shape']
+
   image = Image.open(args.image)
   image=image.convert('RGB').resize((width, height), Image.ANTIALIAS)
 

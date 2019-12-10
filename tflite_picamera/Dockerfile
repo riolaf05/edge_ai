@@ -89,6 +89,10 @@ ADD https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilen
 RUN chmod +x /home/scripts/models/download.sh
 RUN bash /home/scripts/models/download.sh
 
+#Copy demo file
+RUN mkdir /home/scripts/samples
+COPY ./tflite/pi_image_classifier_tflite_demo.py /home/scripts
+
 # Configuring access to Jupyter
 #RUN mkdir /root/notebooks
 #ENV PATH /root/.local/bin/:$PATH
