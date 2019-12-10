@@ -84,8 +84,10 @@ RUN conda update --all
 COPY ./download.sh /home/scripts/models
 
 #Copy demo file
-RUN mkdir /home/scripts/samples
-COPY ./tflite/pi_image_classifier_tflite_demo.py /home/scripts
+COPY ./download.sh /home/scripts/models
+ADD https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip /home/scripts/models
+RUN chmod +x /home/scripts/models/download.sh
+RUN bash /home/scripts/models/download.sh
 
 # Configuring access to Jupyter
 #RUN mkdir /root/notebooks
