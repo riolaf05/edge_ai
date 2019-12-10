@@ -80,11 +80,8 @@ ENV PATH /root/miniconda3/bin:$PATH
 RUN conda update conda -y
 RUN conda update --all
 
-#Install models and labels
+#Install models and labels download script
 COPY ./download.sh /home/scripts/models
-ADD https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip /home/scripts/
-RUN chmod +x /home/scripts/models/download.sh
-RUN bash /home/scripts/models/download.sh
 
 #Copy demo file
 RUN mkdir /home/scripts/samples
