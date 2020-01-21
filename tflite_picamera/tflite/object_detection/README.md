@@ -9,6 +9,7 @@ To build:
 
 ```console
 docker build -t rio05docker/tflite_rpi3_picamera:rpi3_test_4.2 .
+docker push rio05docker/tflite_rpi3_picamera:rpi3_test_4.2
 ```
 
 To run with Raspberry Camera:
