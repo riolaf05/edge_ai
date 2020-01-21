@@ -11,5 +11,5 @@ RUN chmod +x /home/scripts/object_detections/download.sh
 COPY detect_picamera.py /home/scripts/object_detections
 COPY annotation.py /home/scripts/object_detections
 
-ENTRYPOINT ["/bin/bash/" "home/scripts/object_detections/download.sh"]
+ENTRYPOINT ["/bin/bash/" "/home/scripts/object_detections/download.sh"]
 
