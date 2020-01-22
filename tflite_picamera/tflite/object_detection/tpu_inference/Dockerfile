@@ -13,7 +13,6 @@ RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" |
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 RUN apt-get update && apt-get install -y libedgetpu1-std
 
-ENTRYPOINT /bin/sh -c /home/scripts/object_detections/download.sh && /bin/bash
 
 
 
