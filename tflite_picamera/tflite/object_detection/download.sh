@@ -1,13 +1,17 @@
 #!/bin/bash
 
-if [ $# -eq 0 ]; then
+#Note:
+# $# is the number of arguments in $*
+# $* is the list of arguments passed to the current process
+
+if [ $# -eq 0 ]; then #this checks if any argument has been passes to the script
   DATA_DIR="/tmp"
 else
   DATA_DIR="$1"
 fi
 
 # Install required packages
-python3 -m pip install -r requirements.txt
+#python3 -m pip install -r requirements.txt
 
 # Get TF Lite model and labels
 curl -O http://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip
@@ -22,3 +26,7 @@ rm ${DATA_DIR}/labelmap.txt
 (cd ${DATA_DIR} && curl -O  https://dl.google.com/coral/canned_models/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite)
 
 echo -e "Files downloaded to ${DATA_DIR}"
+
+
+#Extra line added in the script to run all command line arguments
+exec "$@";

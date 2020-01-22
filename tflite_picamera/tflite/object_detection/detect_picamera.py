@@ -203,6 +203,7 @@ def main():
   with picamera.PiCamera(resolution=(CAMERA_WIDTH, CAMERA_HEIGHT), framerate=30) as camera:
     print("Start recording..")
     output = StreamingOutput()
+    camera.start_preview()
     camera.start_recording(output, format='mjpeg')
     try:
 
@@ -230,6 +231,7 @@ def main():
 
     finally:
       camera.stop_recording()
+      camera.stop_preview()
 
 
 if __name__ == '__main__':
