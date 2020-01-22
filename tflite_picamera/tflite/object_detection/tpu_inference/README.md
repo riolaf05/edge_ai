@@ -15,6 +15,6 @@ docker push rio05docker/tflite_rpi:rpi3_test_4.3
 To run with Raspberry Camera:
 
 ```console
-docker run -it --privileged --device=/dev/vchiq -p 8000:8000 --rm rio05docker/tflite_rpi:rpi3_test_4.3  python3.5 detect_picamera.py --model /tmp/detect.tflite --labels /tmp/coco_labels.txt
+docker run -it --privileged --device=/dev/vchiq -p 8000:8000 --rm rio05docker/tflite_rpi:rpi3_test_4.3  python3.5 detect_picamera.py --model /tmp/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite --labels /tmp/coco_labels.txt
 ```
 
