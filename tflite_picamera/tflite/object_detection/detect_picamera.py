@@ -1,19 +1,4 @@
 # python3
-#
-# Copyright 2019 The TensorFlow Authors. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-"""Example using TF Lite to detect objects with the Raspberry Pi camera."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -200,39 +185,39 @@ def main():
   interpreter.allocate_tensors()
   _, input_height, input_width, _ = interpreter.get_input_details()[0]['shape']
 
-  with picamera.PiCamera(resolution=(CAMERA_WIDTH, CAMERA_HEIGHT), framerate=30) as camera:
-    print("Start recording..")
-    output = StreamingOutput()
-    camera.start_preview()
-    camera.start_recording(output, format='mjpeg')
-    try:
+with picamera.PiCamera(resolution=(CAMERA_WIDTH, CAMERA_HEIGHT), framerate=30) as camera:
+  print("Start recording..")
+  output = StreamingOutput()
+  camera.start_preview()
+  camera.start_recording(output, format='mjpeg')
 
-      address = ('', 8000)
-      server = StreamingServer(address, StreamingHandler)
-      server.serve_forever()
-      stream = io.BytesIO()
-      
-      annotator = Annotator(camera)
-      
-      for _ in camera.capture_continuous(stream, format='jpeg', use_video_port=True):
-        stream.seek(0)
-        image = Image.open(stream).convert('RGB').resize((input_width, input_height), Image.ANTIALIAS)
-        start_time = time.monotonic()
-        results = detect_objects(interpreter, image, args.threshold)
-        elapsed_ms = (time.monotonic() - start_time) * 1000
+  address = ('', 8000)
+  server = StreamingServer(address, StreamingHandler)
+  server.serve_forever()
+  
+  annotator = Annotator(camera)
+  
+  try:
+    stream = io.BytesIO()
+    annotator = Annotator(camera)
+    for _ in camera.capture_continuous(stream, format='jpeg', use_video_port=True):
+      print("test")
+      stream.seek(0)
+      image = Image.open(stream).convert('RGB').resize((input_width, input_height), Image.ANTIALIAS)
+      start_time = time.monotonic()
+      results = detect_objects(interpreter, image, args.threshold)
+      elapsed_ms = (time.monotonic() - start_time) * 1000
 
-        annotator.clear()
-        annotate_objects(annotator, results, labels)
-        annotator.text([5, 0], '%.1fms' % (elapsed_ms))
-        annotator.update()
+      annotator.clear()
+      annotate_objects(annotator, results, labels)
+      annotator.text([5, 0], '%.1fms' % (elapsed_ms))
+      annotator.update()
 
-        stream.seek(0)
-        stream.truncate()
+      stream.seek(0)
+      stream.truncate()
 
-    finally:
-      camera.stop_recording()
-      camera.stop_preview()
+  finally:
+    camera.stop_recording()
+    camera.stop_preview()
 
 
-if __name__ == '__main__':
-  main()
