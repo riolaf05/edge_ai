@@ -5,6 +5,7 @@ Based on Raspbian Stretch, it contains:
 * Tensorflow Lite
 * Picamera module
 
+
 To build: 
 
 ```console
