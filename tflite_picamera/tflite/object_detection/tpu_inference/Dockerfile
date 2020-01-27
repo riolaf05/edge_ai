@@ -34,18 +34,18 @@ COPY detect_picamera.py /home/scripts/object_detections
 COPY annotation.py /home/scripts/object_detections
 
 #Install Tensorflow Edge CPU libraries
-RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list \
-&& curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - 
-RUN apt-get update 
-RUN apt-get install -y libedgetpu1-std \
-&& apt-get install -y python3-edgetpu
+#RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list \
+#&& curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - 
+#RUN apt-get update
+#RUN apt-get install -y libedgetpu1-std \
+#&& apt-get install -y python3-edgetpu
 
 #RUN wget https://dl.google.com/coral/python/tflite_runtime-1.14.0-cp37-cp37m-linux_armv7l.whl \
 #&& pip3 install tflite_runtime-1.14.0-cp37-cp37m-linux_armv7l.whl \
 #&& rm tflite_runtime-1.14.0-cp37-cp37m-linux_armv7l.whl
 
 #ENTRYPOINT ["/bin/sh", "-c", "/home/scripts/object_detections/download.sh"]
-ENTRYPOINT /bin/sh -c /home/scripts/object_detections/download.sh && /bin/bash
+#ENTRYPOINT /bin/sh -c /home/scripts/object_detections/download.sh && /bin/bash
 
 
 
