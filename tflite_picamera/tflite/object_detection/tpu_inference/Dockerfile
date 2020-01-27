@@ -36,8 +36,8 @@ COPY annotation.py /home/scripts/object_detections
 #Install Tensorflow Edge CPU libraries
 RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | sudo tee /etc/apt/sources.list.d/coral-edgetpu.list \
 && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - \
-&& apt-get update \
-&& apt-get install -y libedgetpu1-std \
+&& apt-get update 
+RUN apt-get install -y libedgetpu1-std \
 && apt-get install -y python3-edgetpu
 
 #RUN wget https://dl.google.com/coral/python/tflite_runtime-1.14.0-cp37-cp37m-linux_armv7l.whl \
