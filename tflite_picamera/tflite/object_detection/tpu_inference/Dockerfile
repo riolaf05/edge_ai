@@ -35,8 +35,8 @@ COPY annotation.py /home/scripts/object_detections
 
 #Install Tensorflow Edge CPU libraries
 RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | sudo tee /etc/apt/sources.list.d/coral-edgetpu.list \
-&& curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - \
-&& apt-get update 
+&& curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - 
+RUN apt-get update 
 RUN apt-get install -y libedgetpu1-std \
 && apt-get install -y python3-edgetpu
 
