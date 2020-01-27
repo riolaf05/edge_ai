@@ -22,6 +22,8 @@ RUN apt-get install -y libilmbase-dev
 RUN apt-get install -y libopenexr-dev
 RUN apt-get install -y libgstreamer1.0-dev
 
+RUN mkdir /home/scripts/
+
 RUN mkdir /home/scripts/object_detections
 
 WORKDIR /home/scripts/object_detections
