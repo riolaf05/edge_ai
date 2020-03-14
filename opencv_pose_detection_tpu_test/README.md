@@ -14,6 +14,7 @@ It must run on RaspberryPi with Edge TPU Coral device.
 To build: 
 
 ```console
+./download_model.sh
 docker build -t rio05docker/obj_detection_cd:rpi3_posenet_browser_test .
 docker push rio05docker/obj_detection_cd:rpi3_posenet_browser_test
 ```
