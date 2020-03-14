@@ -14,7 +14,6 @@ from PIL import Image
 
 import numpy as np
 from edgetpu.detection.engine import DetectionEngine
-from pose_engine import PoseEngine
 
 # Parameters
 AUTH_USERNAME = os.environ.get('AUTH_USERNAME', 'pi')
@@ -124,12 +123,10 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
                     stream_video.truncate()
                     stream_video.seek(0)
                     
-
                     # cv2 / PIL coding
                     cv2_im = np.frombuffer(stream_video.getvalue(), dtype=np.uint8)
                     cv2_im = cv2.imdecode(cv2_im, 1)
                     pil_im = Image.fromarray(cv2_im)
-                    
                     '''
                     # object detection
                     start_ms = time.time()
@@ -140,31 +137,8 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 
                     cv2_im = self.append_objs_to_img(cv2_im, objs, labels)
                     '''
-
-                    #pose detection
-                    pil_im.resize((641, 481), Image.NEAREST)
-                    engine = PoseEngine('/home/scripts/pose_detection/browser/models/posenet_mobilenet_v1_075_481_641_quant_decoder_edgetpu.tflite')
-                    poses, inference_time = engine.DetectPosesInImage(np.uint8(pil_im))
-
-                    #print points on shell
-                    for pose in poses:
-                        if pose.score < 0.4: continue
-                        print('\nPose Score: ', pose.score)
-                        for label, keypoint in pose.keypoints.items():
-                            print(' %-20s x=%-4d y=%-4d score=%.1f' %
-                                (label, keypoint.yx[1], keypoint.yx[0], keypoint.score))
-                    
-
-                    #Draw lines between points
-                    for pose in poses:
-                        if pose.score < 0.4:
-                            for part in pose.keypoints.keys():
-                                lineThickness=2
-                                cv2.line(cv2_im, (pose.keypoints['nose'].yx[1], pose.keypoints['nose'].yx[0]), (pose.keypoints['right wrist'].yx[1], pose.keypoints['right wrist'].yx[0]), [0, 255, 0], lineThickness)
-                                #TODO: must connect other parts
-
                     r, buf = cv2.imencode(".jpg", cv2_im)
-                    #Show on browser
+
                     self.wfile.write(b'--FRAME\r\n')
                     self.send_header('Content-type','image/jpeg')
                     self.send_header('Content-length',str(len(buf)))
